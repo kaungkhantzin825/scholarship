@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Scholarship extends Model
+class Scholarship extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, HasSlug;
+    use HasFactory, SoftDeletes, HasSlug, InteractsWithMedia;
 
     protected $fillable = [
         'category_id',
@@ -81,6 +84,32 @@ class Scholarship extends Model
     public function applications(): HasMany
     {
         return $this->hasMany(Application::class);
+    }
+
+    // ─── Media ───────────────────────────────────────────────────────────────
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('banner')
+            ->singleFile()
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
+
+        $this->addMediaCollection('gallery');
+
+        $this->addMediaCollection('documents');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(400)
+            ->height(250)
+            ->performOnCollections('banner');
+
+        $this->addMediaConversion('card')
+            ->width(800)
+            ->height(450)
+            ->performOnCollections('banner');
     }
 
     // ─── Scopes ──────────────────────────────────────────────────────────────
