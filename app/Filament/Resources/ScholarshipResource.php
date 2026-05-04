@@ -57,14 +57,21 @@ class ScholarshipResource extends Resource
 
             Forms\Components\Section::make('Banner Image')
                 ->schema([
-                    SpatieMediaLibraryFileUpload::make('banner')
-                        ->collection('banner')
+                    Forms\Components\FileUpload::make('banner_image')
                         ->image()
+                        ->imageEditor()
+                        ->directory('scholarships/banners')
+                        ->disk('public')
+                        ->visibility('public')
                         ->maxSize(5120)
                         ->label('Banner Image (recommended: 1200×630)')
-                        ->helperText('Upload a banner image for the scholarship')
+                        ->helperText('Upload a banner image for the scholarship. Click Save button to apply changes.')
                         ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                        ->imageEditor()
+                        ->downloadable()
+                        ->openable()
+                        ->deletable()
+                        ->preserveFilenames()
+                        ->imageResizeMode('cover')
                         ->imageCropAspectRatio('16:9')
                         ->imageResizeTargetWidth('1200')
                         ->imageResizeTargetHeight('630'),
@@ -163,8 +170,10 @@ class ScholarshipResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('banner_image')
+                    ->disk('public')
                     ->width(80)
-                    ->height(50),
+                    ->height(50)
+                    ->defaultImageUrl(url('/images/placeholder.png')),
 
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
