@@ -56,6 +56,7 @@ class ScholarshipResource extends Resource
                 ]),
 
             Forms\Components\Section::make('Banner Image')
+                ->description('Current banner will be replaced when you upload a new one and click Save.')
                 ->schema([
                     Forms\Components\FileUpload::make('banner_image')
                         ->image()
@@ -64,16 +65,13 @@ class ScholarshipResource extends Resource
                         ->visibility('public')
                         ->maxSize(5120)
                         ->label('Banner Image (recommended: 1200×630)')
-                        ->helperText('Select an image. It will be saved when you click the Save button below.')
                         ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                        ->downloadable()
-                        ->openable()
-                        ->deletable()
                         ->imageResizeMode('cover')
                         ->imageCropAspectRatio('16:9')
                         ->imageResizeTargetWidth('1200')
                         ->imageResizeTargetHeight('630')
-                        ->storeFiles(false),
+                        ->downloadable()
+                        ->openable(),
                 ]),
 
             Forms\Components\Section::make('Scholarship Details')
