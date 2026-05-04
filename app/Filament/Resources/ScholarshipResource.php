@@ -55,6 +55,16 @@ class ScholarshipResource extends Resource
                         ->columnSpanFull(),
                 ]),
 
+            Forms\Components\Section::make('Banner Image')
+                ->description('Enter the banner image path or URL. Changes save when you click Save button.')
+                ->schema([
+                    Forms\Components\TextInput::make('banner_image')
+                        ->label('Banner Image Path')
+                        ->placeholder('scholarships/banners/image.jpg')
+                        ->helperText('Enter the image path (e.g., scholarships/banners/image.jpg) or full URL')
+                        ->maxLength(500),
+                ]),
+
             Forms\Components\Section::make('Scholarship Details')
                 ->columns(2)
                 ->schema([
