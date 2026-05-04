@@ -55,25 +55,6 @@ class ScholarshipResource extends Resource
                         ->columnSpanFull(),
                 ]),
 
-            Forms\Components\Section::make('Banner Image')
-                ->description('Current banner will be replaced when you upload a new one and click Save.')
-                ->schema([
-                    Forms\Components\FileUpload::make('banner_image')
-                        ->image()
-                        ->directory('scholarships/banners')
-                        ->disk('public')
-                        ->visibility('public')
-                        ->maxSize(5120)
-                        ->label('Banner Image (recommended: 1200×630)')
-                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                        ->imageResizeMode('cover')
-                        ->imageCropAspectRatio('16:9')
-                        ->imageResizeTargetWidth('1200')
-                        ->imageResizeTargetHeight('630')
-                        ->downloadable()
-                        ->openable(),
-                ]),
-
             Forms\Components\Section::make('Scholarship Details')
                 ->columns(2)
                 ->schema([
