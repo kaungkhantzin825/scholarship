@@ -57,7 +57,7 @@ class ScholarshipResource extends Resource
                 ->schema([
                     Forms\Components\FileUpload::make('banner_image')
                         ->image()
-                        ->imageEditor()
+                        ->disk('public')
                         ->directory('scholarships')
                         ->maxSize(5120)
                         ->label('Banner Image (recommended: 1200×630)')
