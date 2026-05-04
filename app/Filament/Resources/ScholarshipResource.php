@@ -56,24 +56,14 @@ class ScholarshipResource extends Resource
                 ]),
 
             Forms\Components\Section::make('Banner Image')
-                ->description('Upload a banner image. The file will upload when selected.')
+                ->description('Enter the banner image URL or path. Image will save when you click Save button.')
                 ->schema([
-                    Forms\Components\FileUpload::make('banner_image')
-                        ->label('Banner Image')
-                        ->image()
-                        ->directory('scholarships/banners')
-                        ->disk('public')
-                        ->visibility('public')
-                        ->maxSize(5120)
-                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                        ->imageResizeMode('cover')
-                        ->imageCropAspectRatio('16:9')
-                        ->imageResizeTargetWidth('1200')
-                        ->imageResizeTargetHeight('630')
-                        ->downloadable()
-                        ->openable()
-                        ->deletable()
-                        ->helperText('Recommended size: 1200×630 pixels. Max 5MB.'),
+                    Forms\Components\TextInput::make('banner_image')
+                        ->label('Banner Image URL/Path')
+                        ->placeholder('https://example.com/image.jpg or scholarships/banners/image.jpg')
+                        ->helperText('Enter full URL or relative path to image file')
+                        ->maxLength(500)
+                        ->suffixIcon('heroicon-o-photo'),
                 ]),
 
             Forms\Components\Section::make('Scholarship Details')
