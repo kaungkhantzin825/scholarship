@@ -31,7 +31,7 @@
     <p>We reserve the right at any time to modify or discontinue, temporarily or permanently, the Service (or any part thereof) with or without notice.</p>
 
     <h2>6. Contact Us</h2>
-    <p>If you have any questions about these Terms, please contact us at support@scolarship.pnpmyanmar.com.</p>
+    <p>If you have any questions about these Terms, please contact us at webdeveloperkkz@gmail.com.</p>
     
     <div class="footer">
         &copy; {{ date('Y') }} ScholarHub. All rights reserved.

@@ -28,7 +28,7 @@
     <p>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed.</p>
     
     <h2>5. Contact Us</h2>
-    <p>If you have any questions about this privacy policy or our privacy practices, please contact us at support@scolarship.pnpmyanmar.com.</p>
+    <p>If you have any questions about this privacy policy or our privacy practices, please contact us at webdeveloperkkz@gmail.com.</p>
     
     <div class="footer">
         &copy; {{ date('Y') }} ScholarHub. All rights reserved.
