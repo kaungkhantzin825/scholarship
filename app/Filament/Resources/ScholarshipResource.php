@@ -59,22 +59,21 @@ class ScholarshipResource extends Resource
                 ->schema([
                     Forms\Components\FileUpload::make('banner_image')
                         ->image()
-                        ->imageEditor()
                         ->directory('scholarships/banners')
                         ->disk('public')
                         ->visibility('public')
                         ->maxSize(5120)
                         ->label('Banner Image (recommended: 1200×630)')
-                        ->helperText('Upload a banner image for the scholarship. Click Save button to apply changes.')
+                        ->helperText('Select an image. It will be saved when you click the Save button below.')
                         ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                         ->downloadable()
                         ->openable()
                         ->deletable()
-                        ->preserveFilenames()
                         ->imageResizeMode('cover')
                         ->imageCropAspectRatio('16:9')
                         ->imageResizeTargetWidth('1200')
-                        ->imageResizeTargetHeight('630'),
+                        ->imageResizeTargetHeight('630')
+                        ->storeFiles(false),
                 ]),
 
             Forms\Components\Section::make('Scholarship Details')
