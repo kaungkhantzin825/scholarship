@@ -23,7 +23,7 @@ class StatsOverviewWidget extends BaseWidget
                 ->chart(
                     Scholarship::selectRaw('COUNT(*) as count')
                         ->groupBy(\DB::raw('DATE(created_at)'))
-                        ->orderBy('created_at')
+                        ->orderByRaw('DATE(created_at)')
                         ->limit(7)
                         ->pluck('count')
                         ->toArray()
@@ -36,7 +36,7 @@ class StatsOverviewWidget extends BaseWidget
                 ->chart(
                     Application::selectRaw('COUNT(*) as count')
                         ->groupBy(\DB::raw('DATE(applied_at)'))
-                        ->orderBy('applied_at')
+                        ->orderByRaw('DATE(applied_at)')
                         ->limit(7)
                         ->pluck('count')
                         ->toArray()
