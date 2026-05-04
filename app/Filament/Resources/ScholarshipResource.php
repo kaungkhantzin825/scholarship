@@ -9,8 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class ScholarshipResource extends Resource
 {
@@ -57,12 +55,10 @@ class ScholarshipResource extends Resource
 
             Forms\Components\Section::make('Banner Image')
                 ->schema([
-                    SpatieMediaLibraryFileUpload::make('banner')
-                        ->collection('banner')
+                    Forms\Components\FileUpload::make('banner_image')
                         ->image()
                         ->imageEditor()
-                        ->disk('public')
-                        ->visibility('public')
+                        ->directory('scholarships')
                         ->maxSize(5120)
                         ->label('Banner Image (recommended: 1200×630)')
                         ->helperText('Upload a banner image for the scholarship'),
@@ -160,8 +156,7 @@ class ScholarshipResource extends Resource
     {
         return $table
             ->columns([
-                SpatieMediaLibraryImageColumn::make('banner')
-                    ->collection('banner')
+                Tables\Columns\ImageColumn::make('banner_image')
                     ->width(80)
                     ->height(50),
 

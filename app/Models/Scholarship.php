@@ -10,18 +10,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Scholarship extends Model implements HasMedia
+class Scholarship extends Model
 {
-    use HasFactory, SoftDeletes, HasSlug, InteractsWithMedia;
+    use HasFactory, SoftDeletes, HasSlug;
 
     protected $fillable = [
         'category_id',
         'title',
         'slug',
+        'banner_image',
         'excerpt',
         'description',
         'eligibility',
@@ -85,32 +83,6 @@ class Scholarship extends Model implements HasMedia
         return $this->hasMany(Application::class);
     }
 
-    // ─── Media ───────────────────────────────────────────────────────────────
-
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('banner')
-            ->singleFile()
-            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
-
-        $this->addMediaCollection('gallery');
-
-        $this->addMediaCollection('documents');
-    }
-
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->width(400)
-            ->height(250)
-            ->performOnCollections('banner');
-
-        $this->addMediaConversion('card')
-            ->width(800)
-            ->height(450)
-            ->performOnCollections('banner');
-    }
-
     // ─── Scopes ──────────────────────────────────────────────────────────────
 
     public function scopeActive($query)
@@ -165,7 +137,7 @@ class Scholarship extends Model implements HasMedia
 
     public function getBannerUrlAttribute(): string
     {
-        $url = $this->getFirstMediaUrl('banner', 'card');
+        $url = $this->banner_image ? url('storage/' . $this->banner_image) : null;
         if (! $url) {
             return 'https://placehold.co/800x450/4F46E5/FFFFFF?text=' . urlencode($this->title);
         }
@@ -179,7 +151,7 @@ class Scholarship extends Model implements HasMedia
 
     public function getThumbUrlAttribute(): string
     {
-        $url = $this->getFirstMediaUrl('banner', 'thumb');
+        $url = $this->banner_image ? url('storage/' . $this->banner_image) : null;
         if (! $url) {
             return 'https://placehold.co/400x250/4F46E5/FFFFFF?text=' . urlencode($this->title);
         }
