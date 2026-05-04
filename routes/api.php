@@ -6,9 +6,11 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ScholarshipController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\AdmobSettingController;
+use App\Http\Controllers\Api\AppVersionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/settings/admob', [AdmobSettingController::class, 'index']);
+Route::get('/app-version', [AppVersionController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
