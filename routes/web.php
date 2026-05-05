@@ -24,3 +24,7 @@ Route::get('/privacy-policy', function () {
 Route::get('/terms-of-service', function () {
     return view('terms');
 });
+
+Route::get('/delete-account', function () {
+    return view('delete-account');
+});
