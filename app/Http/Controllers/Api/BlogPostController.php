@@ -16,10 +16,13 @@ class BlogPostController extends Controller
         $posts = BlogPost::published()
             ->when($request->category, fn($q, $c) => $q->where('post_category', $c))
             ->when($request->search, fn($q, $s) =>
-                $q->where('title', 'like', "%{$s}%")
-                  ->orWhere('excerpt', 'like', "%{$s}%")
+                $q->where(fn($sub) => $sub
+                    ->where('title', 'like', "%{$s}%")
+                    ->orWhere('excerpt', 'like', "%{$s}%")
+                )
             )
             ->orderByDesc('published_at')
+            ->orderByDesc('id')
             ->paginate($request->get('per_page', 12));
 
         return response()->json([

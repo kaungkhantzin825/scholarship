@@ -44,5 +44,14 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+
+        // Ad event reporting — keyed by the client-supplied device ID where
+        // available (falls back to IP), tighter than the general API limit
+        // since a real user cannot generate this many ad events per minute.
+        RateLimiter::for('ad-events', function (Request $request) {
+            $key = $request->input('device_id') ?: $request->ip();
+
+            return Limit::perMinute(30)->by($key);
+        });
     }
 }

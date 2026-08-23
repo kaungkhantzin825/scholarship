@@ -127,8 +127,10 @@ class Scholarship extends Model implements HasMedia
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, fn($q, $s) =>
-            $q->where('title', 'like', "%{$s}%")
-              ->orWhere('excerpt', 'like', "%{$s}%")
+            $q->where(fn($sub) => $sub
+                ->where('title', 'like', "%{$s}%")
+                ->orWhere('excerpt', 'like', "%{$s}%")
+            )
         );
 
         $query->when($filters['country'] ?? null, fn($q, $v) =>

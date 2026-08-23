@@ -13,13 +13,17 @@ class ScholarshipController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
+        $sortable = ['created_at', 'deadline', 'views_count', 'applications_count'];
+        $sort = in_array($request->get('sort'), $sortable, true) ? $request->get('sort') : 'created_at';
+
         $scholarships = Scholarship::with(['category', 'tags'])
             ->active()
             ->filter($request->only([
                 'search', 'country', 'level', 'category',
                 'field', 'amount_type', 'deadline_from', 'deadline_to',
             ]))
-            ->orderByDesc($request->get('sort', 'created_at'))
+            ->orderByDesc($sort)
+            ->orderByDesc('id')
             ->paginate($request->get('per_page', 15));
 
         return response()->json([

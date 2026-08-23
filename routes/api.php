@@ -6,11 +6,16 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ScholarshipController;
 use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\AdmobSettingController;
+use App\Http\Controllers\Api\AdEventController;
 use App\Http\Controllers\Api\AppVersionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/settings/admob', [AdmobSettingController::class, 'index']);
 Route::get('/app-version', [AppVersionController::class, 'index']);
+
+// Ad impression/click logging — public (guests see ads too), throttled
+// per-device separately since it's a public write endpoint.
+Route::post('/ads/events', [AdEventController::class, 'store'])->middleware('throttle:ad-events');
 
 /*
 |--------------------------------------------------------------------------

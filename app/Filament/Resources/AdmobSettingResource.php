@@ -62,6 +62,46 @@ class AdmobSettingResource extends Resource
                             ->label('iOS Interstitial Unit ID')
                             ->maxLength(255),
                     ]),
+                Forms\Components\Section::make('Policy & Content Settings')
+                    ->description('Required by AdMob policy so ads are tagged correctly for the audience viewing them.')
+                    ->schema([
+                        Forms\Components\Select::make('max_ad_content_rating')
+                            ->label('Max Ad Content Rating')
+                            ->options([
+                                'G' => 'G — General audiences',
+                                'PG' => 'PG — Parental guidance',
+                                'T' => 'T — Teen',
+                                'MA' => 'MA — Mature audiences',
+                            ])
+                            ->default('T')
+                            ->required(),
+                        Forms\Components\Toggle::make('tag_for_child_directed_treatment')
+                            ->label('Treat app as child-directed (COPPA)')
+                            ->helperText('Only enable if this app is directed at children under 13.'),
+                        Forms\Components\Toggle::make('tag_for_under_age_of_consent')
+                            ->label('Tag users as under age of consent (GDPR)')
+                            ->helperText('Leave off unless your audience is known to be under the age of consent.'),
+                        Forms\Components\Textarea::make('test_device_ids')
+                            ->label('Test Device IDs')
+                            ->helperText('Comma-separated AdMob test device IDs. Devs/QA devices listed here always get test ads, so nobody accidentally clicks a live ad.')
+                            ->rows(2),
+                    ]),
+                Forms\Components\Section::make('Ad Frequency (Interstitials)')
+                    ->description('Keeps interstitials from feeling excessive — capped quietly in the app, with no limit message shown to the user.')
+                    ->schema([
+                        Forms\Components\TextInput::make('interstitial_min_interval_seconds')
+                            ->label('Minimum Seconds Between Interstitials')
+                            ->numeric()
+                            ->minValue(30)
+                            ->default(90)
+                            ->required(),
+                        Forms\Components\TextInput::make('interstitial_max_per_session')
+                            ->label('Max Interstitials Per Session')
+                            ->numeric()
+                            ->minValue(1)
+                            ->default(3)
+                            ->required(),
+                    ]),
             ]);
     }
 
