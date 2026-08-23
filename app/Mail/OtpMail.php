@@ -21,8 +21,8 @@ class OtpMail extends Mailable
     public function envelope(): Envelope
     {
         $subject = $this->type === 'registration'
-            ? 'Verify Your ScholarHub Account'
-            : 'Reset Your ScholarHub Password';
+            ? 'Verify Your Edu Scholar Account'
+            : 'Reset Your Edu Scholar Password';
 
         return new Envelope(subject: $subject);
     }

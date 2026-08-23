@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'admin@scholarhub.com'],
             [
-                'name'     => 'ScholarHub Admin',
+                'name'     => 'Edu Scholar Admin',
                 'password' => Hash::make('password'),
                 'is_admin' => true,
             ]
@@ -169,7 +169,7 @@ class DatabaseSeeder extends Seeder
                 'excerpt'       => 'A curated list of scholarships with upcoming deadlines that are actively accepting applications.',
                 'content'       => '<h2>Don\'t Miss These Opportunities</h2><p>Scholarships can transform your academic journey. Here are the top 10 currently open scholarships...</p>',
                 'post_category' => 'news',
-                'author_name'   => 'ScholarHub Editorial',
+                'author_name'   => 'Edu Scholar Editorial',
                 'is_featured'   => true,
                 'published_at'  => now()->subDays(2),
             ],
@@ -196,7 +196,7 @@ class DatabaseSeeder extends Seeder
                 'excerpt'       => 'Everything you need to know about meeting English language requirements for international scholarships.',
                 'content'       => '<h2>IELTS Preparation Guide</h2><p>Most international scholarships require proof of English proficiency. Here is your complete preparation guide...</p>',
                 'post_category' => 'guide',
-                'author_name'   => 'ScholarHub Team',
+                'author_name'   => 'Edu Scholar Team',
                 'is_featured'   => false,
                 'published_at'  => now()->subDays(15),
             ],

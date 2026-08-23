@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ScholarHub OTP</title>
+<title>Edu Scholar OTP</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #F8F9FF; font-family: 'Segoe UI', Arial, sans-serif; }
@@ -29,7 +29,7 @@
 <div class="wrapper">
   <div class="card">
     <div class="header">
-      <h1>🎓 ScholarHub</h1>
+      <h1>🎓 Edu Scholar</h1>
       <p>{{ $type === 'registration' ? 'Account Verification' : 'Password Reset' }}</p>
     </div>
     <div class="body">
@@ -38,9 +38,9 @@
       @endif
       <p class="msg">
         @if($type === 'registration')
-          Thank you for joining ScholarHub! Use the OTP below to verify your email address and complete your registration.
+          Thank you for joining Edu Scholar! Use the OTP below to verify your email address and complete your registration.
         @else
-          We received a request to reset your ScholarHub password. Use the OTP below to proceed. If you didn't request this, please ignore this email.
+          We received a request to reset your Edu Scholar password. Use the OTP below to proceed. If you didn't request this, please ignore this email.
         @endif
       </p>
       <div class="otp-box">
@@ -49,11 +49,11 @@
         <p class="expire">⏱ Expires in <strong>10 minutes</strong></p>
       </div>
       <div class="warning">
-        <p>⚠️ Never share this OTP with anyone. ScholarHub staff will never ask for your OTP.</p>
+        <p>⚠️ Never share this OTP with anyone. Edu Scholar staff will never ask for your OTP.</p>
       </div>
     </div>
     <div class="footer">
-      <p>© {{ date('Y') }} ScholarHub. All rights reserved.<br>
+      <p>© {{ date('Y') }} Edu Scholar. All rights reserved.<br>
       This is an automated email. Please do not reply.</p>
     </div>
   </div>

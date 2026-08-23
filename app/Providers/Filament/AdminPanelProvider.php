@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('🎓 ScholarHub Admin')
+            ->brandName('🎓 Edu Scholar Admin')
             ->colors([
                 'primary' => Color::Indigo,
             ])
