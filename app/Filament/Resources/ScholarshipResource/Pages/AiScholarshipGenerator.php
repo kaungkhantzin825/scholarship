@@ -55,7 +55,7 @@ class AiScholarshipGenerator extends Page implements HasForms
     {
         $data = $this->form->getState();
 
-        $apiKey = env('GEMINI_API_KEY');
+        $apiKey = config('services.gemini.key');
         if (!$apiKey) {
             Notification::make()
                 ->title('Gemini API key is missing')

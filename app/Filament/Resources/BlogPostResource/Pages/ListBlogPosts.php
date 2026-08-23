@@ -30,7 +30,7 @@ class ListBlogPosts extends ListRecords
                         ->rows(4)
                 ])
                 ->action(function (array $data) {
-                    $apiKey = env('GEMINI_API_KEY');
+                    $apiKey = config('services.gemini.key');
                     if (!$apiKey) {
                         Notification::make()->title('Gemini API key is missing.')->danger()->send();
                         return;
