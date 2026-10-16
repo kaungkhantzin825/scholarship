@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ApplicationController;
 use App\Http\Controllers\Api\AdmobSettingController;
 use App\Http\Controllers\Api\AdEventController;
 use App\Http\Controllers\Api\AppVersionController;
+use App\Http\Controllers\Api\AiChatController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/settings/admob', [AdmobSettingController::class, 'index']);
@@ -75,3 +76,10 @@ Route::prefix('applications')
         Route::post('/',     [ApplicationController::class, 'store']);
         Route::get('{id}',   [ApplicationController::class, 'show']);
     });
+
+// ─── Public: AI Scholarship Assistant ─────────────────────────────────────────
+// Generous rate limit (Gemini is expensive) but enough to feel conversational.
+Route::prefix('ai')->middleware('throttle:30,1')->group(function () {
+    Route::get('suggestions', [AiChatController::class, 'suggestions']);
+    Route::post('chat',       [AiChatController::class, 'chat']);
+});
