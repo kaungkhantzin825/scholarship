@@ -79,7 +79,25 @@ Route::prefix('applications')
 
 // ─── Public: AI Scholarship Assistant ─────────────────────────────────────────
 // Generous rate limit (Gemini is expensive) but enough to feel conversational.
+// Guests can chat; signing in unlocks persistence, uploads and applying.
 Route::prefix('ai')->middleware('throttle:30,1')->group(function () {
     Route::get('suggestions', [AiChatController::class, 'suggestions']);
     Route::post('chat',       [AiChatController::class, 'chat']);
 });
+
+// ─── Authenticated: AI documents, applications & history ─────────────────────
+Route::prefix('ai')
+    ->middleware(['auth:sanctum', 'throttle:60,1'])
+    ->group(function () {
+        Route::get('context',            [AiChatController::class, 'contextSummary']);
+
+        Route::post('upload',            [AiChatController::class, 'upload']);
+        Route::get('uploads',            [AiChatController::class, 'uploads']);
+        Route::delete('uploads/{id}',    [AiChatController::class, 'deleteUpload']);
+
+        Route::post('apply',             [AiChatController::class, 'apply']);
+
+        Route::get('conversations',          [AiChatController::class, 'conversations']);
+        Route::get('conversations/{id}',     [AiChatController::class, 'showConversation']);
+        Route::delete('conversations/{id}',  [AiChatController::class, 'destroyConversation']);
+    });
